@@ -87,6 +87,51 @@ test("첫 실행, 독립 세트, 저장, 새로고침, 무변경, 단위와 히�
   expect(errors).toEqual([]);
 });
 
+test("모바일 4세트는 한 줄: iPhone 16 Pro 폭, 세 자리 중량과 소수, 확대 시 잘림 없음", async ({
+  page,
+}) => {
+  await boot(page);
+  await firstRecord(page);
+  const card = page.locator(target);
+  const cases = [
+    ["40", "40", "50", "50"],
+    ["100", "100", "125", "125"],
+    ["12.5", "12.5", "15", "15"],
+    ["100.5", "100.5", "125.5", "125.5"],
+  ];
+  for (const weights of cases) {
+    await card.click();
+    for (let n = 1; n <= 4; n++) await field(page, n).fill(weights[n - 1]);
+    const save = page.getByRole("button", { name: "저장", exact: true });
+    if (await save.isEnabled()) await save.click();
+    else await page.getByRole("button", { name: "뒤로", exact: true }).click();
+    await expect(card.locator(".set-value")).toHaveCount(4);
+    for (const width of [390, 402, 430]) {
+      await page.setViewportSize({ width, height: 874 });
+      const fits = await card.locator(".set-summary").evaluate((el) => {
+        const container = el.getBoundingClientRect();
+        const items = Array.from(el.querySelectorAll(".summary-item"), (item) =>
+          item.getBoundingClientRect(),
+        );
+        return items.every(
+          (item) =>
+            Math.abs(item.top - items[0].top) < 1 &&
+            item.left >= container.left - 1 &&
+            item.right <= container.right + 1,
+        );
+      });
+      expect(fits, `${width}px / ${weights.join(" · ")}`).toBe(true);
+    }
+  }
+  await page.setViewportSize({ width: 402, height: 874 });
+  await page.evaluate(() => { document.documentElement.style.fontSize = "32px"; });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await expect(card.locator(".set-value")).toHaveCount(4);
+  await page.evaluate(() => { document.documentElement.style.fontSize = ""; });
+  await page.setViewportSize({ width: 800, height: 900 });
+  expect(await card.locator(".set-summary").evaluate((el) => getComputedStyle(el).fontSize)).toBe("23px");
+});
+
 test("세트 복사, 중간 삭제, 취소, 마지막 삭제, 범위 입력", async ({ page }) => {
   await boot(page);
   await firstRecord(page);

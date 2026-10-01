@@ -606,6 +606,29 @@
     margin-top: 6px;
   }
 }
+@media (max-width: 599px) {
+  .exercise-card.exercise-card--four-sets {
+    display: block;
+    position: relative;
+  }
+  .exercise-card--four-sets h3 {
+    padding-right: 28px;
+  }
+  .exercise-card--four-sets > svg {
+    position: absolute;
+    top: 22px;
+    right: 20px;
+  }
+  .exercise-card--four-sets .set-summary {
+    font-size: 1.125rem;
+  }
+  .exercise-card--four-sets .set-dot {
+    margin: 0 3px;
+  }
+  .exercise-card--four-sets .times {
+    margin: 0;
+  }
+}
 @media (max-width: 359px) {
   .set-card {
     padding: 10px 14px 18px;

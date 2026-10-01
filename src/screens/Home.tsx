@@ -108,7 +108,7 @@ export function Home() {
                 .filter((v) => v.exercise.categoryId === category.id)
                 .map(({ exercise, current, error: recordError }) => (
                   <button
-                    className="exercise-card"
+                    className={`exercise-card${current?.sets.length === 4 ? " exercise-card--four-sets" : ""}`}
                     key={exercise.id}
                     id={`exercise-${exercise.id}`}
                     onClick={() => go(`/exercise/${exercise.id}`)}
