@@ -176,7 +176,11 @@ test("하위 경로, 실제 새 버전 적용, 다른 창의 편집 보존, 캐�
     ).toHaveText("40×12");
     await context.setOffline(false);
   } finally {
-    await new Promise<void>((r) => server.close(() => r()));
+    await new Promise<void>((r) => {
+      server.close(() => r());
+      // The isolated test browser can still hold keep-alive connections.
+      server.closeAllConnections();
+    });
   }
 });
 

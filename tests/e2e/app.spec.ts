@@ -304,6 +304,10 @@ test("PWA 파일, 외부 요청 없음, 오프라인 저장과 재실행", async
   await page.locator(target).click();
   await field(page, 1).fill("75");
   await page.getByRole("button", { name: "저장", exact: true }).click();
+  // Wait for the committed value and completed navigation before restarting.
+  await expect(page.locator(target).locator(".set-value").first()).toHaveText(
+    "75×12",
+  );
   await page.reload();
   await expect(page.locator(target).locator(".set-value").first()).toHaveText(
     "75×12",
