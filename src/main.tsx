@@ -4,7 +4,7 @@ import { App } from "./app/App";
 import { initializePwa } from "./pwa/lifecycle";
 import "./styles/app.css";
 document.documentElement.dataset.release =
-  import.meta.env.VITE_RELEASE ?? "1.1.2";
+  import.meta.env.VITE_RELEASE ?? "1.1.3";
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />

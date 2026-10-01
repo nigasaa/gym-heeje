@@ -631,8 +631,13 @@
     font-size: 1.25rem;
     letter-spacing: -0.95px;
   }
+  /* Share spare row width between sets; long numbers keep the minimum gap. */
+  .exercise-card--compact-sets .summary-item + .summary-item {
+    flex: 1 0 auto;
+  }
   .exercise-card--compact-sets .set-dot {
-    margin: 0 1px;
+    margin: 0 auto;
+    padding: 0 1px;
   }
   .exercise-card--compact-sets .times {
     margin: 0;

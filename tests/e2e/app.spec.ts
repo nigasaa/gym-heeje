@@ -87,7 +87,7 @@ test("첫 실행, 독립 세트, 저장, 새로고침, 무변경, 단위와 히�
   expect(errors).toEqual([]);
 });
 
-test("모바일 3·4세트는 같은 크기, 중량은 파란색, 4세트 한 줄과 확대 시 잘림 없음", async ({
+test("모바일 3·4세트 간격, 같은 크기, 파란 중량, 4세트 한 줄과 확대 시 잘림 없음", async ({
   page,
 }) => {
   await boot(page);
@@ -119,9 +119,17 @@ test("모바일 3·4세트는 같은 크기, 중량은 파란색, 4세트 한 �
             item.left >= container.left - 1 &&
             item.right <= container.right + 1,
         );
-        return { fits, availableWidth: container.width, neededWidth: items.reduce((sum, item) => sum + item.width, 0) };
+        const values = Array.from(el.querySelectorAll(".set-value"), (value) =>
+          value.getBoundingClientRect(),
+        );
+        const gaps = values.slice(1).map((value, i) => value.left - values[i].right);
+        return { fits, gaps, availableWidth: container.width, neededWidth: items.reduce((sum, item) => sum + item.width, 0) };
       });
       expect(fits.fits, `${width}px / ${weights.join(" · ")} / ${JSON.stringify(fits)}`).toBe(true);
+      if (weights === cases[0]) {
+        // Ordinary two-digit weights should use the available width for clear separation.
+        expect(Math.min(...fits.gaps)).toBeGreaterThanOrEqual(16);
+      }
     }
   }
   await page.setViewportSize({ width: 402, height: 874 });
@@ -143,6 +151,11 @@ test("모바일 3·4세트는 같은 크기, 중량은 파란색, 4세트 한 �
   await page.getByRole("button", { name: "저장", exact: true }).click();
   await expect(card.locator(".set-value")).toHaveCount(3);
   await expect(card.locator(".set-summary")).toHaveCSS("font-size", "20px");
+  const threeSetGaps = await card.locator(".set-summary").evaluate((el) => {
+    const values = Array.from(el.querySelectorAll(".set-value"), (value) => value.getBoundingClientRect());
+    return values.slice(1).map((value, i) => value.left - values[i].right);
+  });
+  expect(Math.min(...threeSetGaps)).toBeGreaterThanOrEqual(12);
 });
 
 test("세트 복사, 중간 삭제, 취소, 마지막 삭제, 범위 입력", async ({ page }) => {
