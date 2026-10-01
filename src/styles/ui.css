@@ -50,6 +50,9 @@
 .set-value {
   white-space: nowrap;
 }
+.set-weight {
+  color: var(--blue);
+}
 .set-dot {
   color: #a3afc0;
   margin: 0 9px;
@@ -266,6 +269,9 @@
   font-weight: 500;
   color: #8490a2;
   letter-spacing: 0;
+}
+.number-input--weight input:not([aria-invalid="true"]) {
+  color: var(--blue);
 }
 .number-input input[aria-invalid="true"] {
   color: #b53036;
@@ -607,25 +613,28 @@
   }
 }
 @media (max-width: 599px) {
-  .exercise-card.exercise-card--four-sets {
+  .exercise-card.exercise-card--compact-sets {
     display: block;
     position: relative;
+    padding-left: 14px;
+    padding-right: 14px;
   }
-  .exercise-card--four-sets h3 {
+  .exercise-card--compact-sets h3 {
     padding-right: 28px;
   }
-  .exercise-card--four-sets > svg {
+  .exercise-card--compact-sets > svg {
     position: absolute;
     top: 22px;
-    right: 20px;
+    right: 14px;
   }
-  .exercise-card--four-sets .set-summary {
-    font-size: 1.125rem;
+  .exercise-card--compact-sets .set-summary {
+    font-size: 1.25rem;
+    letter-spacing: -0.95px;
   }
-  .exercise-card--four-sets .set-dot {
-    margin: 0 3px;
+  .exercise-card--compact-sets .set-dot {
+    margin: 0 1px;
   }
-  .exercise-card--four-sets .times {
+  .exercise-card--compact-sets .times {
     margin: 0;
   }
 }

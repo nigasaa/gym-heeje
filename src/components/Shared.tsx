@@ -59,9 +59,9 @@ export function SetSummary({ sets }: { sets: SetEntry[] }) {
             className="set-value"
             aria-label={`${i + 1}세트 ${set.weight}, ${set.reps}회`}
           >
-            {set.weight}
+            <span className="set-weight">{set.weight}</span>
             <span className="times">×</span>
-            {set.reps}
+            <span className="set-reps">{set.reps}</span>
           </span>
         </span>
       ))}

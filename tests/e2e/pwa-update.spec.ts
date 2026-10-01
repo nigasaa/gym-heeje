@@ -134,7 +134,7 @@ test("하위 경로, 실제 새 버전 적용, 다른 창의 편집 보존, 캐�
       home.getByRole("button", { name: "업데이트", exact: true }),
     ).toBeVisible();
     await home.getByRole("button", { name: "업데이트", exact: true }).click();
-    await expect(home.locator("html")).toHaveAttribute("data-release", "1.1.1");
+    await expect(home.locator("html")).toHaveAttribute("data-release", "1.1.2");
     await expect(
       page.getByRole("textbox", { name: "1세트 중량", exact: true }),
     ).toHaveValue("55");

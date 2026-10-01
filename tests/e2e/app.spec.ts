@@ -87,7 +87,7 @@ test("첫 실행, 독립 세트, 저장, 새로고침, 무변경, 단위와 히�
   expect(errors).toEqual([]);
 });
 
-test("모바일 4세트는 한 줄: iPhone 16 Pro 폭, 세 자리 중량과 소수, 확대 시 잘림 없음", async ({
+test("모바일 3·4세트는 같은 크기, 중량은 파란색, 4세트 한 줄과 확대 시 잘림 없음", async ({
   page,
 }) => {
   await boot(page);
@@ -113,23 +113,36 @@ test("모바일 4세트는 한 줄: iPhone 16 Pro 폭, 세 자리 중량과 소�
         const items = Array.from(el.querySelectorAll(".summary-item"), (item) =>
           item.getBoundingClientRect(),
         );
-        return items.every(
+        const fits = items.every(
           (item) =>
             Math.abs(item.top - items[0].top) < 1 &&
             item.left >= container.left - 1 &&
             item.right <= container.right + 1,
         );
+        return { fits, availableWidth: container.width, neededWidth: items.reduce((sum, item) => sum + item.width, 0) };
       });
-      expect(fits, `${width}px / ${weights.join(" · ")}`).toBe(true);
+      expect(fits.fits, `${width}px / ${weights.join(" · ")} / ${JSON.stringify(fits)}`).toBe(true);
     }
   }
   await page.setViewportSize({ width: 402, height: 874 });
+  await expect(card.locator(".set-summary")).toHaveCSS("font-size", "20px");
+  await expect(card.locator(".set-weight").first()).toHaveCSS("color", "rgb(35, 91, 235)");
+  await expect(card.locator(".set-reps").first()).toHaveCSS("color", "rgb(23, 35, 49)");
   await page.evaluate(() => { document.documentElement.style.fontSize = "32px"; });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await expect(card.locator(".set-value")).toHaveCount(4);
   await page.evaluate(() => { document.documentElement.style.fontSize = ""; });
   await page.setViewportSize({ width: 800, height: 900 });
   expect(await card.locator(".set-summary").evaluate((el) => getComputedStyle(el).fontSize)).toBe("23px");
+  await page.setViewportSize({ width: 402, height: 874 });
+  await card.click();
+  await expect(field(page, 1)).toHaveCSS("color", "rgb(35, 91, 235)");
+  await expect(field(page, 1, "반복")).toHaveCSS("color", "rgb(23, 35, 49)");
+  await expect(page.locator(".history-card .set-weight").first()).toHaveCSS("color", "rgb(35, 91, 235)");
+  await page.getByRole("button", { name: "4세트 삭제", exact: true }).click();
+  await page.getByRole("button", { name: "저장", exact: true }).click();
+  await expect(card.locator(".set-value")).toHaveCount(3);
+  await expect(card.locator(".set-summary")).toHaveCSS("font-size", "20px");
 });
 
 test("세트 복사, 중간 삭제, 취소, 마지막 삭제, 범위 입력", async ({ page }) => {

@@ -50,7 +50,7 @@ function Stepper({
         >
           {weight ? "−5" : "−"}
         </button>
-        <div className="number-input">
+        <div className={`number-input${weight ? " number-input--weight" : ""}`}>
           <input
             id={id}
             aria-label={`${index + 1}세트 ${label}`}
