@@ -4,9 +4,9 @@
 배포 주소: `https://nigasaa.github.io/gym-heeje/`.
 저장소: `https://github.com/nigasaa/gym-heeje`.
 
-2026-10-01: GitHub Pages 배포를 완료했다. [배포 실행 #36866651849](https://github.com/nigasaa/gym-heeje/actions/runs/36866651849)의 단위 검사 59개와 Chromium 브라우저 검사 11개가 통과했고 build·deploy가 모두 성공했다. 배포 커밋은 `f4a13050cc4f1e7c9063543c4c408ddcf71b4b36`이다.
+2026-10-01: 모바일 4세트 한 줄 표시를 수정한 v1.1.1 배포를 완료했다. [배포 실행 #36870629778](https://github.com/nigasaa/gym-heeje/actions/runs/36870629778)의 단위 검사 59개와 Chromium 브라우저 검사 12개가 통과했고 build·deploy가 모두 성공했다. 배포 커밋은 `efb76628bb4ee940c7c9de908260d5777b5ebc90`이다.
 
-공개 HTTPS 주소를 별도의 빈 Edge 브라우저에서 390×844 화면으로 확인했다. 기본 운동 14종과 분류 순서, manifest·아이콘·서비스 워커 응답, 서로 다른 중량의 세트 저장, 오프라인 새로고침·수정·저장, 이전 설정 표시, 확인 후 운동 삭제와 재실행을 통과했다. 실제 iPhone 홈 화면 설치는 사용자의 기기에서 진행한다.
+공개 HTTPS 주소를 별도의 빈 Edge 브라우저에서 402×874 터치 화면으로 확인했다. v1.1.1 적용과 `40×12 · 40×12 · 50×10 · 50×8`의 한 줄 표시, 기본 운동 14종과 분류 순서, manifest·아이콘·서비스 워커 응답, 오프라인 새로고침·수정·저장, 이전 설정 표시, 확인 후 운동 삭제와 재실행을 통과했다. 실제 iPhone 홈 화면 설치는 사용자의 기기에서 진행한다.
 
 ## 최초 배포
 
