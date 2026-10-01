@@ -63,7 +63,7 @@ npm run preview
 
 ## 휴대폰에 설치할 배포 파일
 
-GitHub Pages 자동 배포 설정은 `.github/workflows/deploy-pages.yml`에 준비했습니다. 최초 설정과 아이폰 홈 화면 추가 방법은 [GitHub Pages 배포 안내](docs/GITHUB_PAGES.md)를 참고하세요. 공개 주소는 `https://nigasaa.github.io/gym-heeje/`이며, 배포 상태는 저장소 Actions에서 확인할 수 있습니다.
+GitHub Pages 배포를 완료했습니다. 휴대폰에서 [Gym희제 열기](https://nigasaa.github.io/gym-heeje/)로 접속할 수 있습니다. 아이폰 홈 화면 추가 방법은 [GitHub Pages 배포 안내](docs/GITHUB_PAGES.md)를 참고하세요. 자동 배포 설정은 `.github/workflows/deploy-pages.yml`에 있으며, main 업데이트 시 검증 후 같은 주소에 배포합니다.
 
 `dist/` 안의 내용을 HTTPS 정적 호스팅에 올리면 됩니다. 루트 주소뿐 아니라 `/gym-heeje/` 같은 하위 경로도 사용할 수 있게 상대 경로로 만들었습니다.
 
@@ -77,7 +77,7 @@ GitHub Pages 자동 배포 설정은 `.github/workflows/deploy-pages.yml`에 준
 6. iPhone Safari는 공유 메뉴의 ‘홈 화면에 추가’, Android Chrome은 ‘앱 설치’ 또는 ‘홈 화면에 추가’를 사용합니다. 메뉴 이름은 OS·브라우저 버전에 따라 다를 수 있습니다.
 7. 실제 폰에서 기록을 입력하고 앱 종료·재실행·비행기 모드 재실행을 확인합니다.
 
-현재 외부 호스팅에는 공개 배포하지 않았습니다. 호스팅 대상이 정해지면 준비된 `dist`를 배포할 수 있습니다. 실제 iPhone/Android 설치 검증은 별도 수동 체크가 필요합니다.
+2026-10-01 GitHub Pages 배포 성공과 공개 주소에서의 모바일 화면·오프라인 저장·운동 삭제를 확인했습니다. 실제 iPhone/Android 설치 검증은 각 기기에서 진행해야 합니다.
 
 ## 기록 규칙
 
@@ -121,7 +121,7 @@ npm run test:e2e
 npx playwright install webkit
 ```
 
-현재 작업 환경에 내려받은 `work/browsers`가 있으면 테스트 실행기가 그 경로를 자동 사용합니다. 없으면 Playwright 기본 경로를 사용합니다. 다른 운영체제에서는 `playwright.config.ts`의 Edge 채널 설정을 해당 환경의 Chromium으로 조정해야 합니다.
+현재 작업 환경에 내려받은 `work/browsers`가 있으면 테스트 실행기가 그 경로를 자동 사용합니다. 없으면 Playwright 기본 경로를 사용합니다. GitHub Actions의 Linux 환경에서는 Chromium을 설치하고 `CI=true`로 실행하면 `edge-mobile-size` 프로젝트가 Chromium을 사용합니다.
 
 테스트 결과와 임시 업데이트 빌드는 이 프로젝트 바깥의 `../../work/`에 둡니다. 이 경로는 앱 데이터를 보관하는 곳이 아닙니다. 결과 요약은 [검증 결과](docs/VALIDATION.md)를 참고하세요.
 

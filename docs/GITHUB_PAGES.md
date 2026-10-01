@@ -4,7 +4,9 @@
 배포 주소: `https://nigasaa.github.io/gym-heeje/`.
 저장소: `https://github.com/nigasaa/gym-heeje`.
 
-2026-09-30: GitHub 저장소를 생성했다. 배포 설정 준비 후 로컬 단위 검사 59개, Edge 브라우저 검사 11개를 다시 실행해 모두 통과했다. 실제 배포 완료 여부는 GitHub Actions의 성공 상태와 공개 주소 접속으로 확인한다.
+2026-10-01: GitHub Pages 배포를 완료했다. [배포 실행 #36866651849](https://github.com/nigasaa/gym-heeje/actions/runs/36866651849)의 단위 검사 59개와 Chromium 브라우저 검사 11개가 통과했고 build·deploy가 모두 성공했다. 배포 커밋은 `f4a13050cc4f1e7c9063543c4c408ddcf71b4b36`이다.
+
+공개 HTTPS 주소를 별도의 빈 Edge 브라우저에서 390×844 화면으로 확인했다. 기본 운동 14종과 분류 순서, manifest·아이콘·서비스 워커 응답, 서로 다른 중량의 세트 저장, 오프라인 새로고침·수정·저장, 이전 설정 표시, 확인 후 운동 삭제와 재실행을 통과했다. 실제 iPhone 홈 화면 설치는 사용자의 기기에서 진행한다.
 
 ## 최초 배포
 
